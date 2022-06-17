@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище БД_ЛюбаModelContainer" CdmEntityContainer="Entities2">
+    <EntitySetMapping Name="Booking">
+      <EntityTypeMapping TypeName="БД_ЛюбаModel.Booking">
+        <MappingFragment StoreEntitySet="Booking">
+          <ScalarProperty Name="id_booking" ColumnName="id_booking" />
+          <ScalarProperty Name="id_employeer" ColumnName="id_employeer" />
+          <ScalarProperty Name="id_table" ColumnName="id_table" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Number_of_seats" ColumnName="Number_of_seats" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employeer">
+      <EntityTypeMapping TypeName="БД_ЛюбаModel.Employeer">
+        <MappingFragment StoreEntitySet="Employeer">
+          <ScalarProperty Name="id_employeer" ColumnName="id_employeer" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+          <ScalarProperty Name="Date_of_Birth" ColumnName="Date_of_Birth" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Gost">
+      <EntityTypeMapping TypeName="БД_ЛюбаModel.Gost">
+        <MappingFragment StoreEntitySet="Gost">
+          <ScalarProperty Name="id_gost" ColumnName="id_gost" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table">
+      <EntityTypeMapping TypeName="БД_ЛюбаModel.Table">
+        <MappingFragment StoreEntitySet="Table">
+          <ScalarProperty Name="id_table" ColumnName="id_table" />
+          <ScalarProperty Name="Number_of_seats" ColumnName="Number_of_seats" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_Svobodnie">
+      <EntityTypeMapping TypeName="БД_ЛюбаModel.Table_Svobodnie">
+        <MappingFragment StoreEntitySet="Table_Svobodnie">
+          <ScalarProperty Name="Number_of_seats" ColumnName="Number_of_seats" />
+          <ScalarProperty Name="id_svobonie" ColumnName="id_svobonie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_zaniti">
+      <EntityTypeMapping TypeName="БД_ЛюбаModel.Table_zaniti">
+        <MappingFragment StoreEntitySet="Table_zaniti">
+          <ScalarProperty Name="Number_of_seats" ColumnName="Number_of_seats" />
+          <ScalarProperty Name="id_zanzti" ColumnName="id_zanzti" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

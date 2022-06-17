@@ -1,0 +1,66 @@
+﻿<Page x:Class="Bronirovanie_Diplom.Pages.WindowBronirovanie.PageBronirovanie"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Bronirovanie_Diplom.Pages.WindowBronirovanie"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Name="window"
+      Title="Бронирование">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition Width="0.3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Top" FontSize="25" Margin="5" Text="{Binding ElementName=window, Path=Title}"></TextBlock>
+        <DataGrid x:Name="spisokBroni" AutoGenerateColumns="False"
+                  Grid.Column="1" Margin="0,50,0,0" CanUserAddRows="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn FontSize="15" Header="Номер бронирования" Binding="{Binding id_booking}"></DataGridTextColumn>
+                <DataGridTextColumn FontSize="15" Header="Дата бронирования" Binding="{Binding Date}"></DataGridTextColumn>
+                <DataGridTextColumn FontSize="15" Header="Время" Binding="{Binding Time}"></DataGridTextColumn>
+                <DataGridTextColumn FontSize="15" Header="Номер столика" Binding="{Binding Table.id_table}"></DataGridTextColumn>
+                <DataGridTextColumn FontSize="15" Header="Имя гостя" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn FontSize="15" Header="Комментарий" Binding="{Binding Description}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Column="0">
+            <Button x:Name="AddBroni"
+                    Content="Забронировать столик" Margin="5,50,5,5"
+                    Click="AddBroni_Click" FontSize="15" Height="30" MinHeight="40"></Button>
+            <Button x:Name="RedacBroni"
+                    Content="Редактировать" Margin="5"
+                    MinHeight="40" Click="RedacBroni_Click" FontSize="15">
+
+            </Button>
+            <Button x:Name="DeletBroni"
+                    Click="DeletBroni_Click"
+                    Content="Удалить" Margin="5" FontSize="15"
+                    MinHeight="40">
+            </Button>
+        </StackPanel>
+        <TextBox x:Name="Searctextbox" Grid.Column="1" BorderBrush="#10101A" VerticalContentAlignment="Center"
+                 FontSize="15" TextChanged="Searctextbox_TextChanged" Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}"
+                 Margin="10,10,10,0" VerticalAlignment="Top" Height="30"
+                 Style="{StaticResource SearchTextBoxStyle}"></TextBox>
+        <Calendar x:Name="serachDatePicker" Grid.Column="2" HorizontalAlignment="Left" FontSize="15" 
+                  SelectedDatesChanged="serachDatePicker_SelectedDatesChanged" Margin="10,50,10,225" SelectedDate="10.10.2013"/>
+        <StackPanel Orientation="Vertical" Grid.Column="2">
+            <TextBlock Text="Текущая дата" Margin="14,220,0,0" FontSize="15" FontWeight="Bold"/>
+            <TextBox BorderBrush="#10101A" HorizontalAlignment="Left" FontSize="15" Text="{Binding ElementName=serachDatePicker, Path=SelectedDate ,StringFormat=d, UpdateSourceTrigger=PropertyChanged}"  
+                Margin="14,5,10,5" Width="176" Height="25"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Column="2">
+            <Button Content="Button" HorizontalAlignment="Left" 
+                VerticalAlignment="Top" Width="65" 
+                Style="{StaticResource buttonSbrosFilter}" Margin="0,270,0,0" Click="Button_Click" Height="60"/>
+            <TextBlock Text="Сбросить фильтер" Margin="-16,300,0,0" FontSize="15" FontWeight="Bold"/>
+        </StackPanel>
+    </Grid>
+</Page>

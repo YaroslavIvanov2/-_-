@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище БД_ЛюбаModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Booking">
+    <Key>
+      <PropertyRef Name="id_booking" />
+    </Key>
+    <Property Name="id_booking" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_employeer" Type="int" Nullable="false" />
+    <Property Name="id_table" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Time" Type="time" Precision="7" Nullable="false" />
+    <Property Name="Number_of_seats" Type="nchar" MaxLength="10" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Number" Type="nvarchar" MaxLength="50" />
+    <Property Name="Discount" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Employeer">
+    <Key>
+      <PropertyRef Name="id_employeer" />
+    </Key>
+    <Property Name="id_employeer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Date_of_Birth" Type="date" Nullable="false" />
+    <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="image" Type="nvarchar(max)" />
+    <Property Name="Login" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Gost">
+    <Key>
+      <PropertyRef Name="id_gost" />
+    </Key>
+    <Property Name="id_gost" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Discount" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Table">
+    <Key>
+      <PropertyRef Name="id_table" />
+    </Key>
+    <Property Name="id_table" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Number_of_seats" Type="int" Nullable="false" />
+    <Property Name="image" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Table_Svobodnie">
+    <Key>
+      <PropertyRef Name="id_svobonie" />
+    </Key>
+    <Property Name="id_svobonie" Type="int" Nullable="false" />
+    <Property Name="Number_of_seats" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Table_zaniti">
+    <Key>
+      <PropertyRef Name="id_zanzti" />
+    </Key>
+    <Property Name="id_zanzti" Type="int" Nullable="false" />
+    <Property Name="Number_of_seats" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Booking_Employeer">
+    <End Role="Employeer" Type="Self.Employeer" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employeer">
+        <PropertyRef Name="id_employeer" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="id_employeer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Booking_Table">
+    <End Role="Table" Type="Self.Table" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table">
+        <PropertyRef Name="id_table" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="id_table" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище БД_ЛюбаModelContainer">
+    <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employeer" EntityType="Self.Employeer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gost" EntityType="Self.Gost" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table_Svobodnie" EntityType="Self.Table_Svobodnie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table_zaniti" EntityType="Self.Table_zaniti" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Booking_Employeer" Association="Self.FK_Booking_Employeer">
+      <End Role="Employeer" EntitySet="Employeer" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Booking_Table" Association="Self.FK_Booking_Table">
+      <End Role="Table" EntitySet="Table" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище БД_ЛюбаModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="id_booking" />
+          </Key>
+          <Property Name="id_booking" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_employeer" Type="int" Nullable="false" />
+          <Property Name="id_table" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Number_of_seats" Type="nchar" MaxLength="10" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="Discount" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Employeer">
+          <Key>
+            <PropertyRef Name="id_employeer" />
+          </Key>
+          <Property Name="id_employeer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date_of_Birth" Type="date" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="image" Type="nvarchar(max)" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Gost">
+          <Key>
+            <PropertyRef Name="id_gost" />
+          </Key>
+          <Property Name="id_gost" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Discount" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="id_table" />
+          </Key>
+          <Property Name="id_table" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number_of_seats" Type="int" Nullable="false" />
+          <Property Name="image" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Table_Svobodnie">
+          <Key>
+            <PropertyRef Name="id_svobonie" />
+          </Key>
+          <Property Name="id_svobonie" Type="int" Nullable="false" />
+          <Property Name="Number_of_seats" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Table_zaniti">
+          <Key>
+            <PropertyRef Name="id_zanzti" />
+          </Key>
+          <Property Name="id_zanzti" Type="int" Nullable="false" />
+          <Property Name="Number_of_seats" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Booking_Employeer">
+          <End Role="Employeer" Type="Self.Employeer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employeer">
+              <PropertyRef Name="id_employeer" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="id_employeer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_Table">
+          <End Role="Table" Type="Self.Table" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table">
+              <PropertyRef Name="id_table" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="id_table" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище БД_ЛюбаModelContainer">
+          <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employeer" EntityType="Self.Employeer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gost" EntityType="Self.Gost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_Svobodnie" EntityType="Self.Table_Svobodnie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_zaniti" EntityType="Self.Table_zaniti" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Booking_Employeer" Association="Self.FK_Booking_Employeer">
+            <End Role="Employeer" EntitySet="Employeer" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_Table" Association="Self.FK_Booking_Table">
+            <End Role="Table" EntitySet="Table" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="БД_ЛюбаModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="id_booking" />
+          </Key>
+          <Property Name="id_booking" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_employeer" Type="Int32" Nullable="false" />
+          <Property Name="id_table" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Number_of_seats" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Discount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employeer" Relationship="Self.FK_Booking_Employeer" FromRole="Booking" ToRole="Employeer" />
+          <NavigationProperty Name="Table" Relationship="Self.FK_Booking_Table" FromRole="Booking" ToRole="Table" />
+        </EntityType>
+        <EntityType Name="Employeer">
+          <Key>
+            <PropertyRef Name="id_employeer" />
+          </Key>
+          <Property Name="id_employeer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date_of_Birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Booking" Relationship="Self.FK_Booking_Employeer" FromRole="Employeer" ToRole="Booking" />
+        </EntityType>
+        <EntityType Name="Gost">
+          <Key>
+            <PropertyRef Name="id_gost" />
+          </Key>
+          <Property Name="id_gost" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Discount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="id_table" />
+          </Key>
+          <Property Name="id_table" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number_of_seats" Type="Int32" Nullable="false" />
+          <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Booking" Relationship="Self.FK_Booking_Table" FromRole="Table" ToRole="Booking" />
+        </EntityType>
+        <Association Name="FK_Booking_Employeer">
+          <End Role="Employeer" Type="Self.Employeer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employeer">
+              <PropertyRef Name="id_employeer" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="id_employeer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_Table">
+          <End Role="Table" Type="Self.Table" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table">
+              <PropertyRef Name="id_table" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="id_table" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Booking" EntityType="Self.Booking" />
+          <EntitySet Name="Employeer" EntityType="Self.Employeer" />
+          <EntitySet Name="Gost" EntityType="Self.Gost" />
+          <EntitySet Name="Table" EntityType="Self.Table" />
+          <AssociationSet Name="FK_Booking_Employeer" Association="Self.FK_Booking_Employeer">
+            <End Role="Employeer" EntitySet="Employeer" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_Table" Association="Self.FK_Booking_Table">
+            <End Role="Table" EntitySet="Table" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <EntitySet Name="Table_Svobodnie" EntityType="БД_ЛюбаModel.Table_Svobodnie" />
+          <EntitySet Name="Table_zaniti" EntityType="БД_ЛюбаModel.Table_zaniti" />
+        </EntityContainer>
+        <EntityType Name="Table_Svobodnie">
+          <Key>
+            <PropertyRef Name="id_svobonie" />
+          </Key>
+          <Property Name="id_svobonie" Type="Int32" Nullable="false" />
+          <Property Name="Number_of_seats" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Table_zaniti">
+          <Key>
+            <PropertyRef Name="id_zanzti" />
+          </Key>
+          <Property Name="id_zanzti" Type="Int32" Nullable="false" />
+          <Property Name="Number_of_seats" Type="Int32" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище БД_ЛюбаModelContainer" CdmEntityContainer="Entities2">
+          <EntitySetMapping Name="Booking">
+            <EntityTypeMapping TypeName="БД_ЛюбаModel.Booking">
+              <MappingFragment StoreEntitySet="Booking">
+                <ScalarProperty Name="id_booking" ColumnName="id_booking" />
+                <ScalarProperty Name="id_employeer" ColumnName="id_employeer" />
+                <ScalarProperty Name="id_table" ColumnName="id_table" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Number_of_seats" ColumnName="Number_of_seats" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employeer">
+            <EntityTypeMapping TypeName="БД_ЛюбаModel.Employeer">
+              <MappingFragment StoreEntitySet="Employeer">
+                <ScalarProperty Name="id_employeer" ColumnName="id_employeer" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Date_of_Birth" ColumnName="Date_of_Birth" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gost">
+            <EntityTypeMapping TypeName="БД_ЛюбаModel.Gost">
+              <MappingFragment StoreEntitySet="Gost">
+                <ScalarProperty Name="id_gost" ColumnName="id_gost" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table">
+            <EntityTypeMapping TypeName="БД_ЛюбаModel.Table">
+              <MappingFragment StoreEntitySet="Table">
+                <ScalarProperty Name="id_table" ColumnName="id_table" />
+                <ScalarProperty Name="Number_of_seats" ColumnName="Number_of_seats" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_Svobodnie">
+            <EntityTypeMapping TypeName="БД_ЛюбаModel.Table_Svobodnie">
+              <MappingFragment StoreEntitySet="Table_Svobodnie">
+                <ScalarProperty Name="Number_of_seats" ColumnName="Number_of_seats" />
+                <ScalarProperty Name="id_svobonie" ColumnName="id_svobonie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_zaniti">
+            <EntityTypeMapping TypeName="БД_ЛюбаModel.Table_zaniti">
+              <MappingFragment StoreEntitySet="Table_zaniti">
+                <ScalarProperty Name="Number_of_seats" ColumnName="Number_of_seats" />
+                <ScalarProperty Name="id_zanzti" ColumnName="id_zanzti" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
